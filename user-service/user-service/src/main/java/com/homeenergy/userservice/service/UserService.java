@@ -48,4 +48,10 @@ public class UserService {
                 .build();
     }
 
+    public UserDto getUserById(Long id) {
+        log.info("UserService getUserById Fetching User by ID : {} ", id);
+        return userRepository.findById(id)
+                .map(this::toDto)
+                .orElse(null);
+    }
 }
