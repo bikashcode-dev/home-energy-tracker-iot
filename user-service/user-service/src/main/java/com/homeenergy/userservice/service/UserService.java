@@ -20,8 +20,6 @@ public class UserService {
 
     // Create a new user
     public UserDto createUser( UserDto input) {
-        log.info("UserService createUser Creating User : {} ", input);
-
         // Create a new User entity from the UserDto
         final User createdUser = User.builder()
                 .name(input.getName())
@@ -54,7 +52,6 @@ public class UserService {
 
     // Retrieve a user by ID
     public UserDto getUserById(Long id) {
-        log.info("UserService getUserById Fetching User by ID : {} ", id);
         // Fetch the user entity from the database by ID and convert it to UserDto
         return userRepository.findById(id)
                 .map(this::toDto)
@@ -63,14 +60,8 @@ public class UserService {
 
 
 
-
-
-
-
-
     // Update an existing user
     public void updateUser(Long id, UserDto userDto) {
-        log.info("UserService updateUser Updating User with ID : {} ", id);
 
 
         // Fetch the existing user entity from the database
@@ -95,7 +86,6 @@ public class UserService {
 
     // Delete a user by ID
     public void deleteUser(Long id) {
-        log.info(" Deleting User with ID : {} ", id);
         // Fetch the user entity to be deleted from the database
         User deleteUser = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + id));
