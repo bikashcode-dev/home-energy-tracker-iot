@@ -19,7 +19,6 @@ public class ExecutionTimeAspect {
     public void controllerMethod() {
     }
 
-
     @Around("controllerMethod()")
    public Object measureExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
