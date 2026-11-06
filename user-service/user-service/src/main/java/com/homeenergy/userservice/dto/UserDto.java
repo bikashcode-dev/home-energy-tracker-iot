@@ -8,6 +8,9 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+// This class represents a Data Transfer Object (DTO) for the User entity.
+// It is used to transfer user data between different layers of the application,
+// such as the controller and service layers.
 public class UserDto {
 
     private Long id;
@@ -17,6 +20,4 @@ public class UserDto {
     private String address;
     private boolean alerting;
     private double energyAlertingThreshold;
-
-
 }
