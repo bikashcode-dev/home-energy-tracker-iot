@@ -1,5 +1,4 @@
 package com.homeenergy.deviceservice.controller;
-
 import com.homeenergy.deviceservice.dto.DeviceDto;
 import com.homeenergy.deviceservice.service.DeviceService;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +34,8 @@ public class DeviceController {
                                                   @RequestBody DeviceDto deviceDto) {
         DeviceDto updatedDevice = deviceService
                 .updateDevice(id, deviceDto);
-
-        return ResponseEntity.ok(updatedDevice);
+        return ResponseEntity
+                .ok(updatedDevice);
     }
 
 
