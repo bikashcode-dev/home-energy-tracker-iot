@@ -1,6 +1,7 @@
 package com.homeenergy.deviceservice.service;
 import com.homeenergy.deviceservice.dto.DeviceDto;
 import com.homeenergy.deviceservice.entity.Device;
+import com.homeenergy.deviceservice.exception.DeviceNotFoundException;
 import com.homeenergy.deviceservice.repository.DeviceRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class DeviceService {
     public DeviceDto getDeviceById(Long id) {
         Device device = deviceRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Device not found"));
+                .orElseThrow(() -> new DeviceNotFoundException("Device not found"));
         return mapToDto(device);
     }
 
@@ -50,7 +51,7 @@ public class DeviceService {
     public DeviceDto updateDevice(Long id, DeviceDto inputDeviceDto) {
         Device existingDevice = deviceRepository.findById(id)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Device not found with id: " + id));
+                        new DeviceNotFoundException("Device not found with id: " + id));
 
         existingDevice.setName(inputDeviceDto.getName());
         existingDevice.setType(inputDeviceDto.getType());
@@ -63,7 +64,7 @@ public class DeviceService {
 
     public void deleteDevice(Long id) {
         if (!deviceRepository.existsById(id)) {
-            throw new IllegalArgumentException("Device not found with id: " + id);
+            throw new DeviceNotFoundException("Device not found with id: " + id);
         }
         deviceRepository.deleteById(id);
     }
