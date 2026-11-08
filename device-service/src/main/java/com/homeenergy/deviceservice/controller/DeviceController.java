@@ -9,16 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/device")
 public class DeviceController {
 
-    private  DeviceService deviceService;
+    private final DeviceService deviceService;
 
     public DeviceController(DeviceService deviceService) {
         this.deviceService = deviceService;
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<DeviceDto> getDeviceById(@PathVariable Long id) {
-        DeviceDto deviceDto = deviceService.getDeviceById(id);
-        return ResponseEntity.ok(deviceDto);
     }
 
 
@@ -28,6 +22,13 @@ public class DeviceController {
         return ResponseEntity.ok(createdDevice);
     }
 
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DeviceDto> getDeviceById(@PathVariable Long id) {
+        DeviceDto deviceDto = deviceService.getDeviceById(id);
+        return ResponseEntity.ok(deviceDto);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<DeviceDto> updateDevice(@PathVariable Long id,

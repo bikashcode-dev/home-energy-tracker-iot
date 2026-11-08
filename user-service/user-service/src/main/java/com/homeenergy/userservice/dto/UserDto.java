@@ -1,5 +1,7 @@
 package com.homeenergy.userservice.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Data
@@ -16,6 +18,9 @@ public class UserDto {
     private Long id;
     private String name;
     private String surname;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Please provide a valid email address")
     private String email;
     private String address;
     private boolean alerting;

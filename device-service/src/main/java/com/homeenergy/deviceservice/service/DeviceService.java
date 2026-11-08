@@ -3,14 +3,12 @@ import com.homeenergy.deviceservice.dto.DeviceDto;
 import com.homeenergy.deviceservice.entity.Device;
 import com.homeenergy.deviceservice.exception.DeviceNotFoundException;
 import com.homeenergy.deviceservice.repository.DeviceRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
-@Component
 public class DeviceService {
 
-    private DeviceRepository deviceRepository;
+    private final DeviceRepository deviceRepository;
 
     public DeviceService(DeviceRepository deviceRepository) {
         this.deviceRepository = deviceRepository;
