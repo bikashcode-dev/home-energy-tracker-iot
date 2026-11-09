@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private static final String USER_NOT_FOUND_MESSAGE = "User not found with ID: ";
+
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
