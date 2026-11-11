@@ -2,14 +2,15 @@ package com.homeenergy.ingestion_service.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+
+import java.time.Instant;
 
 
-@Data
-public class EnergyUsagesDto {
-
-    private Long deviceId;
-    double energyConsumption;
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
+public record EnergyUsagesDto(Long deviceId,
+                              double energyConsumption,
+                              @JsonFormat(shape = JsonFormat.Shape.STRING)
+                              Instant timestamp){
 
 }
+
+

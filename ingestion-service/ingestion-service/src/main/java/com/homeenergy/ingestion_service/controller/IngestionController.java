@@ -1,5 +1,6 @@
 package com.homeenergy.ingestion_service.controller;
 
+import com.homeenergy.ingestion_service.dto.EnergyUsagesDto;
 import com.homeenergy.ingestion_service.service.IngestionService;
 import org.springframework.web.bind.annotation.*;
 
