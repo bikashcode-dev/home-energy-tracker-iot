@@ -9,3 +9,7 @@
 
 # Local Spring Boot configuration
 **/application-local.properties
+
+# Local Kafka runtime data
+docker/kafka/data/
+docker/kafka/kafka_data/
