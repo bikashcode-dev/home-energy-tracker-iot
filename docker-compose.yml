@@ -9,7 +9,7 @@ services:
     restart: always
 
     environment:
-      MYSQL_ROOT_PASSWORD: Bikash@977
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: home_energy_tracker
 
     ports:
@@ -41,9 +41,13 @@ services:
 
       KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:9094,CONTROLLER://0.0.0.0:9093"
 
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092
+                                  ,EXTERNAL://localhost:9094"
 
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT
+                                            ,PLAINTEXT:PLAINTEXT
+                                            ,EXTERNAL:PLAINTEXT"
+
       KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
 
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -80,9 +84,33 @@ services:
       DYNAMIC_CONFIG_ENABLED: "true"
 
 
+  # ==========================================
+  # INFLUXDB 2.10.1 - TIME SERIES DATABASE
+  # ==========================================
+  influxdb:
+    image: influxdb:2.10.1
+    container_name: influxdb
+    restart: unless-stopped
+
+    ports:
+      - "8072:8086"
+
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_USERNAME}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_ORG}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_BUCKET}
+      DOCKER_INFLUXDB_INIT_RETENTION: ${INFLUXDB_RETENTION}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_TOKEN}
+
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+
 # ==========================================
 # PERSISTENT VOLUMES
 # ==========================================
 volumes:
   mysql-data:
   kafka-data:
+  influxdb-data:
