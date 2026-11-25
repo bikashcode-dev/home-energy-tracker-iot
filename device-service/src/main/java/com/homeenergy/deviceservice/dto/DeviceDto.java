@@ -1,6 +1,5 @@
 package com.homeenergy.deviceservice.dto;
 
-import com.homeenergy.deviceservice.entity.Device;
 import com.homeenergy.deviceservice.model.DeviceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

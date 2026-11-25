@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/device")
 public class DeviceController {
-
+//http://localhost:8080/api/v1/device/id
     private final DeviceService deviceService;
 
     public DeviceController(DeviceService deviceService) {
