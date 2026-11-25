@@ -17,9 +17,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -95,13 +94,30 @@ public class UsageService {
         // remove device with null userId
         deviceEnergies.removeIf(
                 deviceEnergy -> deviceEnergy.getUserId() == null);
+        // Get user-device mapping and aggregate per user
+        Map<Long , List<DeviceEnergy>> userDevicEnergyMap = deviceEnergies.stream()
+                .collect(Collectors.groupingBy(DeviceEnergy::getUserId));
 
+        log.info("user-Device Energy Map: {}", userDevicEnergyMap);
+
+
+        // Energy consumption thresholds
+        List<Long> userIds = new ArrayList<>(userDevicEnergyMap.keySet());
+        final Map< Long , Double> userThresholdMap = new HashMap<>();
+        final Map<Long , String>  userEmailMap = new HashMap<>();
+
+
+        for ( final Long userId : userIds) {
+            try{
+                UserDto user = DeviceClient.getUserById(userId);
+            }
+        }
 
     }
 
 
 
-
+    // Influx query ------------- X sql query in future
     private List<FluxTable> getFluxTables(Instant oneHourAgo, Instant now) {
         String fluxQuery = String.format("""
                 from(bucket: "%s")
